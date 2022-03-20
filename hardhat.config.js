@@ -2,7 +2,7 @@ require("@nomiclabs/hardhat-waffle");
 require('dotenv').config();
 
 const RINKEBY_URL = process.env.REACT_APP_RINKEBY_URL;
-const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const METAMASK_PRIVATE_KEY = process.env.METAMASK_PRIVATE_KEY;
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -32,7 +32,7 @@ module.exports = {
     },
     rinkeby: {
       url: RINKEBY_URL,
-      accounts: [`0x${PRIVATE_KEY}`]
+      accounts: [`0x${METAMASK_PRIVATE_KEY}`]
     }
   },
 };
