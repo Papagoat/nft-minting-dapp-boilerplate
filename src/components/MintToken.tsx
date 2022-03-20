@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import MinimalERC721 from '../artifacts/contracts/MinimalERC721.sol/MinimalERC721.json';
 
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS as string;
-const METADATAURI = process.env.REACT_APP_METADATAURI as string;
+const JSON_CONTENT_ID = process.env.REACT_APP_JSON_CONTENT_ID as string;
 const TOTAL_SUPPLY = 100
 
 const MintToken = () => {
@@ -39,6 +39,9 @@ const MintToken = () => {
         const getSignerBalance = await provider.getBalance(signerAddress)
         const getSignerBalanceInEth = ethers.utils.formatEther(getSignerBalance)
         const ethCost = 0.001
+        const metadataURI = `${JSON_CONTENT_ID}/${await getCurrentToken()}.json`
+
+        console.log(metadataURI)
 
         if (parseFloat(getSignerBalanceInEth) < ethCost) {
             console.log("Not enough ETH to process transaction.");
@@ -48,7 +51,7 @@ const MintToken = () => {
 
 
             try {
-                const transaction_init = await contract.payToMint(addr, METADATAURI, 1, {
+                const transaction_init = await contract.payToMint(addr, metadataURI, 1, {
                     value: ethers.utils.parseEther(ethCost.toString()),
                 });
                 const transaction_wait = await transaction_init.wait()

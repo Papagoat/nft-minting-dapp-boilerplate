@@ -7,6 +7,7 @@ import { createAlchemyWeb3, NftMetadata } from "@alch/alchemy-web3";
 import { useState, useEffect } from 'react';
 
 const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS as string;
+const CONTENT_DESCRIPTION = process.env.REACT_APP_CONTENT_DESCRIPTION as string;
 const RINKEBY_URL = process.env.REACT_APP_RINKEBY_URL as string;
 
 const web3 = createAlchemyWeb3(
@@ -38,7 +39,7 @@ const GetNFT = async () => {
 
     const uniqueNFTs = (await RequestNFTMetaData()).ownedNfts.filter((value: NftMetadata, index, self) =>
       index === self.findIndex((t: NftMetadata) => {
-        if (t.description === 'MinimalERC721' && t.contract.address.toLowerCase() === CONTRACT_ADDRESS.toLowerCase()) {
+        if (t.description === CONTENT_DESCRIPTION && t.contract.address.toLowerCase() === CONTRACT_ADDRESS.toLowerCase()) {
           return t.metadata.image === value.metadata.image;
         }
       }

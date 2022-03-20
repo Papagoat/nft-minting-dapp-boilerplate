@@ -1,7 +1,7 @@
 require("@nomiclabs/hardhat-waffle");
 require('dotenv').config();
 
-const RINKEBY_URL = process.env.RINKEBY_URL;
+const RINKEBY_URL = process.env.REACT_APP_RINKEBY_URL;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 // This is a sample Hardhat task. To learn how to create your own go to
